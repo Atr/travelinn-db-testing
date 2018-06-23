@@ -39,7 +39,7 @@ const writeToFileLocations = (batchSize, numBatches) => {
     toWriteTo = '';
     for (let j = 1; j < batchSize + 1; j++) {
       toWriteTo += JSON.stringify({
-        _id: 'l' + ((i * batchSize) + j),
+        _id: 'L' + ((i * batchSize) + j),
         city: faker.address.city(),
         country: faker.address.country(),
       }) + '\n';      
@@ -55,11 +55,12 @@ const writeToFileLocations = (batchSize, numBatches) => {
 ////////////////////////////////
 // For hostels without locations
 
-// Make sure location id parameter exists!
+// Make sure location id parameter number exists!
 const writeToFileHostels = (batchSize, numBatches) => {
   let toWriteTo = '';
   for (let i = 0; i < numBatches; i++) {
     toWriteTo = '';
+    console.time();
     for (let j = 1; j < batchSize + 1; j++) {
       toWriteTo += JSON.stringify({
         _id: '' + ((i * batchSize) + j),
@@ -67,9 +68,11 @@ const writeToFileHostels = (batchSize, numBatches) => {
         description: faker.lorem.paragraph(),
         photos: generatePhotosArr(),
         reviews: generateReviewsArr(),
-        locationId: 'l' + Math.floor(Math.random() * 10000) + 1,
+        locationId: 'L' + Math.floor(Math.random() * 100000) + 1,
       }) + '\n';      
     }
+    console.timeEnd();
+    console.log('batch added to toWriteTo, on batch ', i, ' of ', numBatches);
     try {
       fs.appendFileSync('./database/datafiles/hostels.json', toWriteTo);
     } catch (err) {
@@ -109,6 +112,6 @@ const writeToFileSyncHostelsWithLocations = (batchSize, numBatches) => {
 ////////////////////////////////
 // Run the functions above
 
-writeToFileLocations(100, 100);
-writeToFileHostels(100, 100);
+writeToFileLocations(1000, 100);
+writeToFileHostels(1000, 10000);
 //writeToFileSyncHostelsWithLocations(1000, 100);
