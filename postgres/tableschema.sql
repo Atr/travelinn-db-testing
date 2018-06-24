@@ -5,7 +5,7 @@
 DROP TABLE IF EXISTS hostel;
 DROP TABLE IF EXISTS location;
 DROP TABLE IF EXISTS review;
-DROP TABLE IF EXISTS pictures;
+DROP TABLE IF EXISTS photoarray;
 
 CREATE TABLE hostel (
   id serial PRIMARY KEY,
@@ -24,11 +24,11 @@ CREATE TABLE location (
 CREATE TABLE review (
   id serial PRIMARY KEY,
   rating smallint,
-  topFeature varchar(10),
+  topFeature varchar(30),
   hostelid integer
 );
 
-CREATE TABLE pictures (
+CREATE TABLE photoarray (
   id serial PRIMARY KEY,
   photos varchar(70)[],
   hostelId integer

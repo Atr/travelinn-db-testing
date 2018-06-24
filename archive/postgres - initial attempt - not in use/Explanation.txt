@@ -1,0 +1,11 @@
+You were originally trying to store most of your information all in one hostel record
+Ie, each hostel would match Stacey's original schema
+That means it had review data and photo data as part of its table information
+
+You ran into an issue where you were having trouble loading review data into the database
+This was because you were storing your reviews as an array of JSON objects 
+This was difficult to upload
+
+You revised to make things truly relational
+Hence this folder being outdated/unused
+You're keeping it just in case you might need to reference it later
