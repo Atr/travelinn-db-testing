@@ -45,7 +45,7 @@ const writeToFileLocations = (batchSize, numBatches) => {
       }) + '\n';      
     }
     try {
-      fs.appendFileSync('./database/datafiles/locations.json', toWriteTo);
+      fs.appendFileSync('./couchdb/datafiles/locations.json', toWriteTo);
     } catch (err) {
       console.log('oops!');
     }   
@@ -74,7 +74,7 @@ const writeToFileHostels = (batchSize, numBatches) => {
     console.timeEnd();
     console.log('batch added to toWriteTo, on batch ', i, ' of ', numBatches);
     try {
-      fs.appendFileSync('./database/datafiles/hostels.json', toWriteTo);
+      fs.appendFileSync('./couchdb/datafiles/hostels.json', toWriteTo);
     } catch (err) {
       console.log('oops!');
     }   
@@ -102,7 +102,7 @@ const writeToFileSyncHostelsWithLocations = (batchSize, numBatches) => {
       }) + '\n';      
     }
     try {
-      fs.appendFileSync('./database/datafiles/hostelswithlocationstest.json', toWriteTo);
+      fs.appendFileSync('./couchdb/datafiles/hostelswithlocationstest.json', toWriteTo);
     } catch (err) {
       console.log('oops!');
     }   
