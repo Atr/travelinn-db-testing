@@ -33,7 +33,7 @@ const writeToFileHostels = (batchSize, numBatches) => {
       toWriteTo += faker.lorem.paragraph();
       toWriteTo += '|';
       //Location Id - make sure the multiplier is equal to the number of locations generated
-      toWriteTo += Math.floor(Math.random() * 10000) + 1,
+      toWriteTo += Math.floor(Math.random() * 1000000) + 1,
       toWriteTo += '\n';
     }
     try {
@@ -72,7 +72,7 @@ const writeToFileReviews = (batchSize, numBatches) => {
       toWriteTo += faker.commerce.productAdjective();
       toWriteTo += '|';
       //Hostel Id - make sure the multiplier is equal to the number of hostels generated
-      toWriteTo += Math.floor(Math.random() * 100000) + 1,
+      toWriteTo += Math.floor(Math.random() * 10000000) + 1,
       toWriteTo += '\n';
     }
     try {
@@ -103,8 +103,8 @@ const writeToFilePhotosArrays = (batchSize, numBatches) => {
 // Run your functions here
 // **Remember, if you change totals here, change multipliers per comments above
 
-// writeToFileHostels(1000, 100);
-// writeToFileLocations(100, 100);
+// writeToFileHostels(1000, 1000);
+// writeToFileLocations(1000, 100);
 // writeToFileReviews(1000, 1000);
 // // should have as many photo arrays as hostels. 1:1
 // writeToFilePhotosArrays(10, 100);
@@ -114,19 +114,19 @@ const writeToFilePhotosArrays = (batchSize, numBatches) => {
 // **Remember, if you change numbers here, change multipliers per comments above
 
 console.time('hostel');
-writeToFileHostels(1000, 100);
+writeToFileHostels(1000, 10000);
 console.timeEnd('hostel');
 
 console.time('locations');
-writeToFileLocations(100, 100);
+writeToFileLocations(1000, 1000);
 console.timeEnd('locations');
 
 console.time('review');
-writeToFileReviews(1000, 1000);
+writeToFileReviews(1000, 100000);
 console.timeEnd('review');
 
 // should have as many photo arrays as hostels. 1:1
 console.time('photos');
-writeToFilePhotosArrays(1000, 100);
+writeToFilePhotosArrays(1000, 10000);
 console.timeEnd('photos');
 

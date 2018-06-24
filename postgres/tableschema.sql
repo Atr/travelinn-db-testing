@@ -27,7 +27,6 @@ CREATE TABLE review (
   hostelid integer
 );
 
-
 CREATE TABLE photoarray (
   -- Note that the photoarray id should match the id for the hostel
   -- Ie, photoarray id #33 will be the photos for hostel #33
