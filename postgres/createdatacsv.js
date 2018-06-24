@@ -1,6 +1,10 @@
 const fs = require('fs');
 const faker = require('faker');
 
+//NOTE:
+//You'll need to update the id fields appropriately, 
+//depending on how many records you're generating (see comments below)
+
 ////////////////////////////////
 // Helpers
 
@@ -28,7 +32,8 @@ const writeToFileHostels = (batchSize, numBatches) => {
       toWriteTo += '|';
       toWriteTo += faker.lorem.paragraph();
       toWriteTo += '|';
-      toWriteTo += Math.floor(Math.random() * 1000) + 1,
+      //Location Id - make sure the multiplier is equal to the number of locations generated
+      toWriteTo += Math.floor(Math.random() * 10000) + 1,
       toWriteTo += '\n';
     }
     try {
@@ -47,8 +52,6 @@ const writeToFileLocations = (batchSize, numBatches) => {
       toWriteTo += faker.address.city();
       toWriteTo += '|';
       toWriteTo += faker.address.country();
-      toWriteTo += '|';
-      toWriteTo += Math.floor(Math.random() * 1000) + 1,
       toWriteTo += '\n';
     }
     try {
@@ -68,7 +71,8 @@ const writeToFileReviews = (batchSize, numBatches) => {
       toWriteTo += '|';
       toWriteTo += faker.commerce.productAdjective();
       toWriteTo += '|';
-      toWriteTo += Math.floor(Math.random() * 1000) + 1,
+      //Hostel Id - make sure the multiplier is equal to the number of hostels generated
+      toWriteTo += Math.floor(Math.random() * 100000) + 1,
       toWriteTo += '\n';
     }
     try {
@@ -85,8 +89,6 @@ const writeToFilePhotosArrays = (batchSize, numBatches) => {
     toWriteTo = '';
     for (let j = 1; j < batchSize + 1; j++) {
       toWriteTo += generatePhotosArrPostgresFormat();
-      toWriteTo += '|';
-      toWriteTo += Math.floor(Math.random() * 1000) + 1,
       toWriteTo += '\n';
     }
     try {
@@ -99,9 +101,32 @@ const writeToFilePhotosArrays = (batchSize, numBatches) => {
 
 ////////////////////////////////
 // Run your functions here
+// **Remember, if you change totals here, change multipliers per comments above
 
-writeToFileHostels(100, 1);
-writeToFileLocations(100, 1);
-writeToFileReviews(100, 1);
-writeToFilePhotosArrays(100, 1);
+// writeToFileHostels(1000, 100);
+// writeToFileLocations(100, 100);
+// writeToFileReviews(1000, 1000);
+// // should have as many photo arrays as hostels. 1:1
+// writeToFilePhotosArrays(10, 100);
+
+////////////////////////////////
+// Run your TIMED functions here
+// **Remember, if you change numbers here, change multipliers per comments above
+
+console.time('hostel');
+writeToFileHostels(1000, 100);
+console.timeEnd('hostel');
+
+console.time('locations');
+writeToFileLocations(100, 100);
+console.timeEnd('locations');
+
+console.time('review');
+writeToFileReviews(1000, 1000);
+console.timeEnd('review');
+
+// should have as many photo arrays as hostels. 1:1
+console.time('photos');
+writeToFilePhotosArrays(1000, 100);
+console.timeEnd('photos');
 
