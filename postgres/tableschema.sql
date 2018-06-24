@@ -2,10 +2,10 @@
 -- open the database you want to use for this
 -- run the following in the postgres client: \i postgres/tableschema.sql
 
+DROP TABLE IF EXISTS photoarray;
+DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS hostel;
 DROP TABLE IF EXISTS location;
-DROP TABLE IF EXISTS review;
-DROP TABLE IF EXISTS photoarray;
 
 CREATE TABLE hostel (
   id serial PRIMARY KEY,
