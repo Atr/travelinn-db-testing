@@ -40,6 +40,7 @@ const writeToFileLocations = (batchSize, numBatches) => {
     for (let j = 1; j < batchSize + 1; j++) {
       toWriteTo += JSON.stringify({
         _id: 'L' + ((i * batchSize) + j),
+        type: 'location',
         city: faker.address.city(),
         country: faker.address.country(),
       }) + '\n';      
@@ -64,11 +65,12 @@ const writeToFileHostels = (batchSize, numBatches) => {
     for (let j = 1; j < batchSize + 1; j++) {
       toWriteTo += JSON.stringify({
         _id: '' + ((i * batchSize) + j),
+        type: 'hostel',
         name: faker.address.streetName() + faker.company.bsNoun(),
         description: faker.lorem.paragraph(),
         photos: generatePhotosArr(),
         reviews: generateReviewsArr(),
-        locationId: 'L' + Math.floor(Math.random() * 100000) + 1,
+        locationId: 'L' + Math.floor(Math.random() * 1000000) + 1,
       }) + '\n';      
     }
     console.timeEnd();
@@ -112,6 +114,6 @@ const writeToFileSyncHostelsWithLocations = (batchSize, numBatches) => {
 ////////////////////////////////
 // Run the functions above
 
-writeToFileLocations(1000, 100);
 writeToFileHostels(1000, 10000);
+writeToFileLocations(1000, 1000);
 //writeToFileSyncHostelsWithLocations(1000, 100);
