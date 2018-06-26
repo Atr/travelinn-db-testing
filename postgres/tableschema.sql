@@ -11,7 +11,7 @@ CREATE TABLE hostel (
   id serial PRIMARY KEY,
   name varchar(200),
   description text,
-  locationId integer
+  locationid integer
 );
 
 CREATE TABLE location (
