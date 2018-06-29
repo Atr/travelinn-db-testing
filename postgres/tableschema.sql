@@ -2,7 +2,7 @@
 -- open the database you want to use for this
 -- run the following in the postgres client: \i postgres/tableschema.sql
 
-DROP TABLE IF EXISTS photoarray;
+DROP TABLE IF EXISTS photos;
 DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS hostel;
 DROP TABLE IF EXISTS location;
@@ -11,7 +11,9 @@ CREATE TABLE hostel (
   id serial PRIMARY KEY,
   name varchar(200),
   description text,
-  locationid integer
+  locationid integer,
+  -- photosarrayids varchar(10)[]     -- to match against photos, array vals should be int.  If not, could use CAST.
+  photosarrayids smallint[]
 );
 
 CREATE TABLE location (
@@ -27,11 +29,11 @@ CREATE TABLE review (
   hostelid integer
 );
 
-CREATE TABLE photoarray (
+CREATE TABLE photos (
   -- Note that the photoarray id should match the id for the hostel
   -- Ie, photoarray id #33 will be the photos for hostel #33
   id serial PRIMARY KEY,
-  photos varchar(70)[]
+  url varchar(70)
 );
 
 -- AFTER LOADING DATA, you'll have to add your foreign key constraints
