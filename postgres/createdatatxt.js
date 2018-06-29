@@ -8,12 +8,13 @@ const faker = require('faker');
 ////////////////////////////////
 // Helpers
 
-const generatePhotosArrPostgresFormat = () => {
+const generatePhotoIdsArray = () => {
   let photoString = '{';
-  const numPhotos = Math.floor(Math.random() * 10) + 10;
+  let photoId;
+  const numPhotos = Math.floor(Math.random() * 10) + 15;
   for (let i = 0; i < numPhotos; i += 1) {
-    const photoID = Math.floor(Math.random() * 1059);
-    photoString += `'https://s3-us-west-1.amazonaws.com/travelinn-photos/Photo${photoID}.jpg'`;
+    photoId = Math.floor(Math.random() * 1058) + 1;
+    photoString += `${photoId}`;
     if (i < numPhotos - 1) { photoString += ','};
   }
   photoString += '}';
@@ -34,6 +35,8 @@ const writeToFileHostels = (batchSize, numBatches) => {
       toWriteTo += '|';
       //Location Id - make sure the multiplier is equal to the number of locations generated
       toWriteTo += Math.floor(Math.random() * 1000000) + 1,
+      toWriteTo += '|';
+      toWriteTo += generatePhotoIdsArray();
       toWriteTo += '\n';
     }
     try {
@@ -83,21 +86,20 @@ const writeToFileReviews = (batchSize, numBatches) => {
   }
 };
 
-const writeToFilePhotosArrays = (batchSize, numBatches) => {
+const writeToFilePhotos = () => {
   let toWriteTo = '';
-  for (let i = 0; i < numBatches; i++) {
-    toWriteTo = '';
-    for (let j = 1; j < batchSize + 1; j++) {
-      toWriteTo += generatePhotosArrPostgresFormat();
-      toWriteTo += '\n';
-    }
-    try {
-      fs.appendFileSync('./postgres/datafiles/photos.txt', toWriteTo);
-    } catch (err) {
-      console.log('oops!');
-    }   
+  let photoStr;
+  for (let i = 1; i < 1059; i++) {
+    photoStr = `'https://s3-us-west-1.amazonaws.com/travelinn-photos/Photo${i}.jpg'`;
+    toWriteTo += photoStr;
+    toWriteTo += '\n';
   }
-};
+  try {
+    fs.appendFileSync('./postgres/datafiles/photos.txt', toWriteTo);
+  } catch (err) {
+    console.log('oops!');
+  }   
+}
 
 ////////////////////////////////
 // Run your functions here
@@ -127,6 +129,46 @@ console.timeEnd('review');
 
 // should have as many photo arrays as hostels. 1:1
 console.time('photos');
-writeToFilePhotosArrays(1000, 10000);
+writeToFilePhotos();
 console.timeEnd('photos');
 
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
+////////////////////////////////
+
+// OLD FUNCTIONS - NOT USED ANYMORE
+
+////////////////////////////////
+// Helpers
+
+const generatePhotosArrPostgresFormat = () => {
+  let photoString = '{';
+  const numPhotos = Math.floor(Math.random() * 10) + 10;
+  for (let i = 0; i < numPhotos; i += 1) {
+    const photoID = Math.floor(Math.random() * 1058) + 1;
+    photoString += `'https://s3-us-west-1.amazonaws.com/travelinn-photos/Photo${photoID}.jpg'`;
+    if (i < numPhotos - 1) { photoString += ','};
+  }
+  photoString += '}';
+  return photoString;
+};
+
+////////////////////////////////
+// Functions to write data to csv
+
+const writeToFilePhotosArrays = (batchSize, numBatches) => {
+  let toWriteTo = '';
+  for (let i = 0; i < numBatches; i++) {
+    toWriteTo = '';
+    for (let j = 1; j < batchSize + 1; j++) {
+      toWriteTo += generatePhotosArrPostgresFormat();
+      toWriteTo += '\n';
+    }
+    try {
+      fs.appendFileSync('./postgres/datafiles/photos.txt', toWriteTo);
+    } catch (err) {
+      console.log('oops!');
+    }   
+  }
+};

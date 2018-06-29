@@ -1,4 +1,4 @@
-COPY hostel (name, description, locationid)
+COPY hostel (name, description, locationid, photosarrayids)
 FROM '/Users/alexromanak/Desktop/repos/sdc/testing/travelinn-db-testing/postgres/datafiles/hostels.txt'
 DELIMITER '|';
 
@@ -10,7 +10,7 @@ COPY review (rating, topFeature, hostelid)
 FROM '/Users/alexromanak/Desktop/repos/sdc/testing/travelinn-db-testing/postgres/datafiles/reviews.txt'
 DELIMITER '|';
 
-COPY photoarray (photos)
+COPY photos (url)
 FROM '/Users/alexromanak/Desktop/repos/sdc/testing/travelinn-db-testing/postgres/datafiles/photos.txt'
 -- DELIMITER '|';
 ;
