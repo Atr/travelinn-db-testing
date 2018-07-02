@@ -37,8 +37,4 @@ CREATE TABLE photos (
 );
 
 -- AFTER LOADING DATA, you'll have to add your foreign key constraints
--- And you indexes.
--- AND:
--- copy table doesn't know to update auto-increment
--- so you'll have to go back for each table once you're done
--- and tell the auto increment to start at a higher number
+-- And your indexes.
