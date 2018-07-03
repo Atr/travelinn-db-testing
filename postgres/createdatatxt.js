@@ -90,7 +90,7 @@ const writeToFilePhotos = () => {
   let toWriteTo = '';
   let photoStr;
   for (let i = 1; i < 1059; i++) {
-    photoStr = `'https://s3-us-west-1.amazonaws.com/travelinn-photos/Photo${i}.jpg'`;
+    photoStr = `https://s3-us-west-1.amazonaws.com/travelinn-photos/Photo${i}.jpg`;
     toWriteTo += photoStr;
     toWriteTo += '\n';
   }
